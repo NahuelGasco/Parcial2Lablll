@@ -1,5 +1,10 @@
 package org.example;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -69,14 +74,14 @@ public class SSMunicipal  {
         return existe;
     }
 
-    public void testear() {
+    public void testear() throws ExcepcionAislamiento{
         Map<Integer,Registro> resultados = new HashMap<>();
 
         while (!personas.isEmpty()) {
             Persona persona = personas.poll();
             int numeroKit = persona.getNumKit();
             String dni = persona.getDni();
-            double temperatura = rand.nextInt(36, 40);
+            double temperatura = rand.nextInt(36, 41);
             String barrio = persona.getBarrio();
 
             Registro registro = new Registro(dni, temperatura, barrio);
@@ -91,20 +96,16 @@ public class SSMunicipal  {
             System.out.println("DNI: " + registro.getDni());
             System.out.println("Temperatura: " + registro.getTemperatura());
 
-            if (registro.getTemperatura() >= 38.0) {
+                 if (registro.getTemperatura() >= 38.0) {
                 try {
                     aislar(numeroKit, registro.getBarrio());
                 } catch (ExcepcionAislamiento e) {
                     System.out.println(e.getMessage());
-                }
-            }
-
+                }}
         }
     }
     private void aislar(int numeroKit, String barrio) throws ExcepcionAislamiento {
-        if (barrio != null && !barrio.isEmpty()) {
             throw new ExcepcionAislamiento(numeroKit, barrio);
-        }
     }
 
 }

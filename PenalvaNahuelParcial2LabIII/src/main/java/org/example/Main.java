@@ -28,8 +28,13 @@ public class Main {
         ssm.validacionDNI(paciente4);
         ssm.validacionDNI(paciente5);
 
+        try {
+            ssm.testear();
+        }catch (ExcepcionAislamiento e){
+            System.out.println(e.getMessage());
 
-        System.out.println(ssm.getPersonas().toString());
-        System.out.println(ssm.getReactivos());
+        }
+
+
     }
 }
